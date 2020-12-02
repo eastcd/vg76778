@@ -13,7 +13,8 @@ CREATE TABLE IF NOT EXISTS jd
     password     TEXT,
     email        TEXT,
     id_number    TEXT,
-    phone_number INT
+    phone_number INT,
+    rphone_number INT
 );
 
 CREATE TABLE IF NOT EXISTS sf
