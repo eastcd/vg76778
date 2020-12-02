@@ -1,0 +1,144 @@
+echo: http: panic serving 192.168.1.202:6634: runtime error: slice bounds out of range [17:15]
+goroutine 157 [running]:
+net/http.(*conn).serve.func1(0xc0001757c0)
+	/usr/lib/golang/src/net/http/server.go:1801 +0x147
+panic(0xa3efc0, 0xc0004cc400)
+	/usr/lib/golang/src/runtime/panic.go:975 +0x3e9
+github.com/kallydev/privacy/service.mask(0xc0004cc3e0, 0xf, 0x10, 0x10, 0xf, 0xc0002373d0)
+	/usr/local/privacy/server/service/mask.go:13 +0x330
+github.com/kallydev/privacy/service.IDNumber.Masking(0xc0004af3e0, 0xf, 0xc000237170, 0x0)
+	/usr/local/privacy/server/service/data.go:68 +0x68
+github.com/kallydev/privacy/service.(*QueryResult).Build(0xc0002375c8, 0xc00000e901, 0x2)
+	/usr/local/privacy/server/service/result.go:241 +0x915
+github.com/kallydev/privacy/service.(*Service).queryHandlerFunc(0xc000021cb0, 0xb25ee0, 0xc000175180, 0xc000237b88, 0x491834)
+	/usr/local/privacy/server/service/handler.go:86 +0x905
+github.com/labstack/echo/v4.(*Echo).add.func1(0xb25ee0, 0xc000175180, 0x0, 0x0)
+	/root/go/pkg/mod/github.com/labstack/echo/v4@v4.1.17/echo.go:522 +0x62
+github.com/labstack/echo/v4.(*Echo).ServeHTTP(0xc00000c1e0, 0xb1cd00, 0xc000179ea0, 0xc0004b6600)
+	/root/go/pkg/mod/github.com/labstack/echo/v4@v4.1.17/echo.go:633 +0x182
+net/http.serverHandler.ServeHTTP(0xc000178000, 0xb1cd00, 0xc000179ea0, 0xc0004b6600)
+	/usr/lib/golang/src/net/http/server.go:2843 +0xa3
+net/http.(*conn).serve(0xc0001757c0, 0xb1ddc0, 0xc0004aa4c0)
+	/usr/lib/golang/src/net/http/server.go:1925 +0x8ad
+created by net/http.(*Server).Serve
+	/usr/lib/golang/src/net/http/server.go:2969 +0x36c
+echo: http: panic serving 192.168.1.202:6633: runtime error: slice bounds out of range [17:15]
+goroutine 156 [running]:
+net/http.(*conn).serve.func1(0xc000175720)
+	/usr/lib/golang/src/net/http/server.go:1801 +0x147
+panic(0xa3efc0, 0xc00032c3a0)
+	/usr/lib/golang/src/runtime/panic.go:975 +0x3e9
+github.com/kallydev/privacy/service.mask(0xc00032c380, 0xf, 0x10, 0x10, 0xf, 0xc0004993d0)
+	/usr/local/privacy/server/service/mask.go:13 +0x330
+github.com/kallydev/privacy/service.IDNumber.Masking(0xc0003165d0, 0xf, 0xc000499170, 0x0)
+	/usr/local/privacy/server/service/data.go:68 +0x68
+github.com/kallydev/privacy/service.(*QueryResult).Build(0xc0004995c8, 0xc00000e901, 0x2)
+	/usr/local/privacy/server/service/result.go:241 +0x915
+github.com/kallydev/privacy/service.(*Service).queryHandlerFunc(0xc000021cb0, 0xb25ee0, 0xc0001745a0, 0xc000499b88, 0x491834)
+	/usr/local/privacy/server/service/handler.go:86 +0x905
+github.com/labstack/echo/v4.(*Echo).add.func1(0xb25ee0, 0xc0001745a0, 0x0, 0x0)
+	/root/go/pkg/mod/github.com/labstack/echo/v4@v4.1.17/echo.go:522 +0x62
+github.com/labstack/echo/v4.(*Echo).ServeHTTP(0xc00000c1e0, 0xb1cd00, 0xc000320460, 0xc0003be500)
+	/root/go/pkg/mod/github.com/labstack/echo/v4@v4.1.17/echo.go:633 +0x182
+net/http.serverHandler.ServeHTTP(0xc000178000, 0xb1cd00, 0xc000320460, 0xc0003be500)
+	/usr/lib/golang/src/net/http/server.go:2843 +0xa3
+net/http.(*conn).serve(0xc000175720, 0xb1ddc0, 0xc0004aa540)
+	/usr/lib/golang/src/net/http/server.go:1925 +0x8ad
+created by net/http.(*Server).Serve
+	/usr/lib/golang/src/net/http/server.go:2969 +0x36c
+echo: http: panic serving 192.168.1.202:6637: runtime error: slice bounds out of range [17:15]
+goroutine 103 [running]:
+net/http.(*conn).serve.func1(0xc000324140)
+	/usr/lib/golang/src/net/http/server.go:1801 +0x147
+panic(0xa3efc0, 0xc00032c620)
+	/usr/lib/golang/src/runtime/panic.go:975 +0x3e9
+github.com/kallydev/privacy/service.mask(0xc00032c600, 0xf, 0x10, 0x10, 0xf, 0xc0001653d0)
+	/usr/local/privacy/server/service/mask.go:13 +0x330
+github.com/kallydev/privacy/service.IDNumber.Masking(0xc000316d60, 0xf, 0xc000165170, 0x0)
+	/usr/local/privacy/server/service/data.go:68 +0x68
+github.com/kallydev/privacy/service.(*QueryResult).Build(0xc0001655c8, 0xc00000e901, 0x2)
+	/usr/local/privacy/server/service/result.go:241 +0x915
+github.com/kallydev/privacy/service.(*Service).queryHandlerFunc(0xc000021cb0, 0xb25ee0, 0xc000324000, 0xc000165b88, 0x491834)
+	/usr/local/privacy/server/service/handler.go:86 +0x905
+github.com/labstack/echo/v4.(*Echo).add.func1(0xb25ee0, 0xc000324000, 0x0, 0x0)
+	/root/go/pkg/mod/github.com/labstack/echo/v4@v4.1.17/echo.go:522 +0x62
+github.com/labstack/echo/v4.(*Echo).ServeHTTP(0xc00000c1e0, 0xb1cd00, 0xc000320540, 0xc0004b6400)
+	/root/go/pkg/mod/github.com/labstack/echo/v4@v4.1.17/echo.go:633 +0x182
+net/http.serverHandler.ServeHTTP(0xc000178000, 0xb1cd00, 0xc000320540, 0xc0004b6400)
+	/usr/lib/golang/src/net/http/server.go:2843 +0xa3
+net/http.(*conn).serve(0xc000324140, 0xb1ddc0, 0xc00031c300)
+	/usr/lib/golang/src/net/http/server.go:1925 +0x8ad
+created by net/http.(*Server).Serve
+	/usr/lib/golang/src/net/http/server.go:2969 +0x36c
+echo: http: panic serving 192.168.1.202:6625: runtime error: slice bounds out of range [17:15]
+goroutine 154 [running]:
+net/http.(*conn).serve.func1(0xc0001754a0)
+	/usr/lib/golang/src/net/http/server.go:1801 +0x147
+panic(0xa3efc0, 0xc0002bc7c0)
+	/usr/lib/golang/src/runtime/panic.go:975 +0x3e9
+github.com/kallydev/privacy/service.mask(0xc0002bc7a0, 0xf, 0x10, 0x10, 0xf, 0xc0002353d0)
+	/usr/local/privacy/server/service/mask.go:13 +0x330
+github.com/kallydev/privacy/service.IDNumber.Masking(0xc000296960, 0xf, 0xc000235170, 0x0)
+	/usr/local/privacy/server/service/data.go:68 +0x68
+github.com/kallydev/privacy/service.(*QueryResult).Build(0xc0002355c8, 0xc00000e901, 0x2)
+	/usr/local/privacy/server/service/result.go:241 +0x915
+github.com/kallydev/privacy/service.(*Service).queryHandlerFunc(0xc000021cb0, 0xb25ee0, 0xc0000aa000, 0xc000235b88, 0x491834)
+	/usr/local/privacy/server/service/handler.go:86 +0x905
+github.com/labstack/echo/v4.(*Echo).add.func1(0xb25ee0, 0xc0000aa000, 0x0, 0x0)
+	/root/go/pkg/mod/github.com/labstack/echo/v4@v4.1.17/echo.go:522 +0x62
+github.com/labstack/echo/v4.(*Echo).ServeHTTP(0xc00000c1e0, 0xb1cd00, 0xc0002a0d20, 0xc00021f900)
+	/root/go/pkg/mod/github.com/labstack/echo/v4@v4.1.17/echo.go:633 +0x182
+net/http.serverHandler.ServeHTTP(0xc000178000, 0xb1cd00, 0xc0002a0d20, 0xc00021f900)
+	/usr/lib/golang/src/net/http/server.go:2843 +0xa3
+net/http.(*conn).serve(0xc0001754a0, 0xb1ddc0, 0xc0004aa380)
+	/usr/lib/golang/src/net/http/server.go:1925 +0x8ad
+created by net/http.(*Server).Serve
+	/usr/lib/golang/src/net/http/server.go:2969 +0x36c
+echo: http: panic serving 192.168.1.202:6630: runtime error: slice bounds out of range [17:15]
+goroutine 117 [running]:
+net/http.(*conn).serve.func1(0xc0002085a0)
+	/usr/lib/golang/src/net/http/server.go:1801 +0x147
+panic(0xa3efc0, 0xc0004cc660)
+	/usr/lib/golang/src/runtime/panic.go:975 +0x3e9
+github.com/kallydev/privacy/service.mask(0xc0004cc640, 0xf, 0x10, 0x10, 0xf, 0xc0004953d0)
+	/usr/local/privacy/server/service/mask.go:13 +0x330
+github.com/kallydev/privacy/service.IDNumber.Masking(0xc0004afbd0, 0xf, 0xc000495170, 0x0)
+	/usr/local/privacy/server/service/data.go:68 +0x68
+github.com/kallydev/privacy/service.(*QueryResult).Build(0xc0004955c8, 0xc00000e901, 0x2)
+	/usr/local/privacy/server/service/result.go:241 +0x915
+github.com/kallydev/privacy/service.(*Service).queryHandlerFunc(0xc000021cb0, 0xb25ee0, 0xc000174dc0, 0xc000495b88, 0x491834)
+	/usr/local/privacy/server/service/handler.go:86 +0x905
+github.com/labstack/echo/v4.(*Echo).add.func1(0xb25ee0, 0xc000174dc0, 0x0, 0x0)
+	/root/go/pkg/mod/github.com/labstack/echo/v4@v4.1.17/echo.go:522 +0x62
+github.com/labstack/echo/v4.(*Echo).ServeHTTP(0xc00000c1e0, 0xb1cd00, 0xc0004f0000, 0xc00034e300)
+	/root/go/pkg/mod/github.com/labstack/echo/v4@v4.1.17/echo.go:633 +0x182
+net/http.serverHandler.ServeHTTP(0xc000178000, 0xb1cd00, 0xc0004f0000, 0xc00034e300)
+	/usr/lib/golang/src/net/http/server.go:2843 +0xa3
+net/http.(*conn).serve(0xc0002085a0, 0xb1ddc0, 0xc000216dc0)
+	/usr/lib/golang/src/net/http/server.go:1925 +0x8ad
+created by net/http.(*Server).Serve
+	/usr/lib/golang/src/net/http/server.go:2969 +0x36c
+echo: http: panic serving 192.168.1.202:6650: runtime error: slice bounds out of range [17:15]
+goroutine 166 [running]:
+net/http.(*conn).serve.func1(0xc0004f20a0)
+	/usr/lib/golang/src/net/http/server.go:1801 +0x147
+panic(0xa3efc0, 0xc0004cc940)
+	/usr/lib/golang/src/runtime/panic.go:975 +0x3e9
+github.com/kallydev/privacy/service.mask(0xc0004cc920, 0xf, 0x10, 0x10, 0xf, 0xc0004953d0)
+	/usr/local/privacy/server/service/mask.go:13 +0x330
+github.com/kallydev/privacy/service.IDNumber.Masking(0xc0004f4380, 0xf, 0xc000495170, 0x0)
+	/usr/local/privacy/server/service/data.go:68 +0x68
+github.com/kallydev/privacy/service.(*QueryResult).Build(0xc0004955c8, 0xc00000e901, 0x2)
+	/usr/local/privacy/server/service/result.go:241 +0x915
+github.com/kallydev/privacy/service.(*Service).queryHandlerFunc(0xc000021cb0, 0xb25ee0, 0xc0004f2140, 0xc00020cb88, 0x49186a)
+	/usr/local/privacy/server/service/handler.go:86 +0x905
+github.com/labstack/echo/v4.(*Echo).add.func1(0xb25ee0, 0xc0004f2140, 0x0, 0x0)
+	/root/go/pkg/mod/github.com/labstack/echo/v4@v4.1.17/echo.go:522 +0x62
+github.com/labstack/echo/v4.(*Echo).ServeHTTP(0xc00000c1e0, 0xb1cd00, 0xc0004f00e0, 0xc0004b6700)
+	/root/go/pkg/mod/github.com/labstack/echo/v4@v4.1.17/echo.go:633 +0x182
+net/http.serverHandler.ServeHTTP(0xc000178000, 0xb1cd00, 0xc0004f00e0, 0xc0004b6700)
+	/usr/lib/golang/src/net/http/server.go:2843 +0xa3
+net/http.(*conn).serve(0xc0004f20a0, 0xb1ddc0, 0xc0004aa880)
+	/usr/lib/golang/src/net/http/server.go:1925 +0x8ad
+created by net/http.(*Server).Serve
+	/usr/lib/golang/src/net/http/server.go:2969 +0x36c
