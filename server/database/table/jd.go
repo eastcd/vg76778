@@ -1,109 +1,97 @@
-# encoding: utf-8
-import logging
-import sqlite3
-import threading
-import time
+package table
 
+import (
+	"context"
+	"database/sql"
+	"github.com/kallydev/privacy/database"
+	"github.com/kallydev/privacy/ent"
+	"github.com/kallydev/privacy/ent/jdmodel"
+)
 
-class Scanner:
+var (
+	_ database.Database = &JDDatabase{}
+	_ database.Model    = &JDModel{}
+)
 
-    def __init__(self, database_name, file_name):
-        logging.basicConfig(
-            level=logging.DEBUG,
-            format="%(asctime)s %(levelname)s %(message)s",
-            datefmt='%Y-%m-%d %H:%M:%S',
-        )
-        self.logger = logging.getLogger()
-        self.database_connection = None
-        self.database_name = database_name
-        self.file_name = file_name
-        self.file_rows = 0
-        self.handle_total = 0
-        self.handle_invalid = 0
-        self.handle_queue = 0
-        self.cancel_print_insertion_speed = None
+type JDDatabase struct {
+	Client *ent.Client
+}
 
-    def connect_database(self):
-        self.database_connection = sqlite3.connect(self.database_name)
-        self.database_connection.text_factory = str
+func (db *JDDatabase) QueryByQQNumber(ctx context.Context, qqNumber int64) ([]database.Model, error) {
+	return []database.Model{}, nil
+}
 
-    def close_database(self):
-        self.database_connection.close()
+func (db *JDDatabase) QueryByEmail(ctx context.Context, email string) ([]database.Model, error) {
+	return []database.Model{}, nil
+}
 
-    def insert_qq_and_phone(self, id, name, nickname, password, email, id_number, phone_number):
-        cursor = self.database_connection.cursor()
-        try:
-            cursor.execute("INSERT INTO jd VALUES (?, ?, ?, ?, ?, ?, ?);", (id, name, nickname, password, email, id_number, phone_number))
-        except sqlite3.IntegrityError:
-            self.handle_invalid += 1
-        finally:
-            self.handle_total += 1
-            self.handle_queue += 1
+func (db *JDDatabase) QueryByIDNumber(ctx context.Context, idNumber string) ([]database.Model, error) {
+	return []database.Model{}, nil
+}
 
-    def start_insertion_speed(self):
-        event = threading.Event()
+func (db *JDDatabase) QueryByPhoneNumber(ctx context.Context, phoneNumber int64) ([]database.Model, error) {
+	models, err := db.Client.JDModel.
+		Query().
+		Where(jdmodel.PhoneNumberEQ(phoneNumber)).
+		All(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return entModelsToJDModels(models), nil
+}
 
-        def print_insertion_speed():
-            handle_total = self.handle_total
-            while not event.wait(1):
-                if self.handle_total - handle_total == 0:
-                    continue
-                self.logger.info("{}/s, {}/{} progress, {} rows are invalid, {} seconds left".format(
-                    self.handle_total - handle_total,
-                    self.handle_total,
-                    self.file_rows,
-                    self.handle_invalid,
-                    (self.file_rows - self.handle_total) / (self.handle_total - handle_total),
-                ))
-                handle_total = self.handle_total
+type JDModel struct {
+	Name        sql.NullString
+	PhoneNumber sql.NullInt64
+	Address     sql.NullString
+}
 
-        threading.Thread(target=print_insertion_speed).start()
-        return event.set
+func (model *JDModel) GetName() (name string, valid bool) {
+	return model.Name.String, model.Name.Valid
+}
 
-    def start(self):
-        # Get the number of file rows
-        self.logger.info("start scanning file lines")
-        start_time = time.time()
-        with open(self.file_name) as file:
-            self.file_rows = 0
-            for _ in file:
-                self.file_rows += 1
-        end_time = time.time()
-        self.logger.info("scan completed, there are a total of {} lines, and it taken {} seconds".format(
-            self.file_rows,
-            end_time - start_time,
-        ))
-        # Insert QQ and phone numbers
-        self.connect_database()
-        self.cancel_print_insertion_speed = self.start_insertion_speed()
-        with open(self.file_name) as file:
-            for line in file:
-                line = line.strip()
-                dataset = line.split("---")
-                if len(dataset) < 6:
-                    self.handle_invalid += 1
-                    self.handle_total += 1
-                    continue
-                name = dataset[0]
-                nickname = dataset[1]
-                password = dataset[2]
-                email = dataset[3]
-                id_number = dataset[4]
-                phone_number = dataset[5]
-                self.insert_qq_and_phone(self.handle_total, name, nickname, password, email, id_number, phone_number)
-                if self.handle_queue >= 400000:
-                    self.database_connection.commit()
-                    self.handle_queue = 0
-        self.database_connection.commit()
-        self.cancel_print_insertion_speed()
-        self.close_database()
-        self.logger.info("completed, insert {} rows, {} rows of invalid data".format(
-            self.handle_total,
-            self.handle_invalid,
-        ))
-        exit()
+func (model *JDModel) GetNickname() (nickname string, valid bool) {
+	return "", false
+}
 
+func (model *JDModel) GetPassword() (password string, valid bool) {
+	return "", false
+}
 
-if __name__ == '__main__':
-    scanner = Scanner("database/database.db", "12g.txt")
-    scanner.start()
+func (model *JDModel) GetEmail() (email string, valid bool) {
+	return "", false
+}
+
+func (model *JDModel) GetQQNumber() (qqNumber int64, valid bool) {
+	return 0, false
+}
+
+func (model *JDModel) GetIDNumber() (idNumber string, valid bool) {
+	return "", false
+}
+
+func (model *JDModel) GetPhoneNumber() (phoneNumber int64, valid bool) {
+	return model.PhoneNumber.Int64, model.PhoneNumber.Valid
+}
+
+func (model *JDModel) GetAddress() (address string, valid bool) {
+	return model.Address.String, model.Address.Valid
+}
+
+func entModelsToJDModels(endModels []*ent.JDModel) []database.Model {
+	models := make([]database.Model, len(endModels))
+	for i, model := range endModels {
+		models[i] = &JDModel{
+			Name: sql.NullString{
+				String: model.Name,
+				Valid:  model.Name != "",
+			},
+			PhoneNumber: sql.NullInt64{
+				Int64: model.PhoneNumber,
+				Valid: model.PhoneNumber != 0,
+			},
+
+		}
+	}
+	return models
+}
